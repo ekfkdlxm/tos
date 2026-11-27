@@ -1,24 +1,20 @@
 <!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>토스</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="토스"><link rel="apple-touch-icon" href="./apple-touch-icon.png"><style>:root{--toss-blue:#3182f6;--toss-blue-light:#e8f3ff;--toss-red:#f04452;--toss-bg:#f2f4f6;--toss-card:#ffffff;--toss-text:#191f28;--toss-sub:#8b95a1;--toss-gray-btn:#f2f4f6}*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;user-select:none;-webkit-user-select:none}body{background:#000;display:flex;justify-content:center;min-height:100vh}.app-viewport{width:100%;max-width:430px;min-height:100vh;background:var(--toss-bg);position:relative;display:flex;flex-direction:column;overflow-x:hidden;padding-top:env(safe-area-inset-top);box-shadow:0 0 25px rgba(0,0,0,.5)}.screen{display:none;flex-direction:column;flex:1;padding-bottom:calc(78px + env(safe-area-inset-bottom))}.screen.active{display:flex;animation:fadeIn .18s ease-out}@keyframes fadeIn{from{opacity:.9;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
 
-/* 토스 스플래시 (순백색 배경 + 중앙 입체 3D 블루 심볼만 단독 노출) */
 .splash-screen{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:100vh;background:#ffffff;z-index:100000;display:flex;justify-content:center;align-items:center;transition:opacity .45s ease-out,visibility .45s ease-out}
 .splash-screen.fade-out{opacity:0;visibility:hidden}
 .toss-symbol-3d{width:76px;height:76px;animation:symbolPulse .65s cubic-bezier(.16,1,.3,1)}
 @keyframes symbolPulse{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
 
-/* 공통 토스 카드 & 버튼 */
 .toss-card{background:#fff;margin:0 16px 12px;border-radius:22px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.015)}
 .toss-pill-btn{background:var(--toss-gray-btn);color:#4e5968;border:none;padding:7px 13px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;flex-shrink:0}
 .toss-pill-btn:active{background:#e5e8eb}
 .toss-pill-btn.blue{background:var(--toss-blue-light);color:var(--toss-blue)}
 
-/* 하단 네비게이션 바 (토스 홈 탭바 & 토스증권 플로팅 탭바) */
 .bottom-tab-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:calc(62px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(0,0,0,.05);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding-top:4px;z-index:100}
 .tab-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;font-weight:600;color:#8b95a1;cursor:pointer}
 .tab-item.active{color:#191f28;font-weight:800}
 .tab-item svg{width:22px;height:22px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 
-/* 토스증권 전용 플로팅 하단 바 */
 .sec-bottom-bar{position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:398px;display:flex;align-items:center;gap:10px;z-index:120}
 .sec-back-circle{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);box-shadow:0 4px 16px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.04);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;color:#4e5968}
 .sec-nav-pill{flex:1;height:52px;border-radius:26px;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);box-shadow:0 4px 16px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.04);display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:0 8px}
@@ -26,7 +22,6 @@
 .sec-nav-item.active{color:#191f28;font-weight:800}
 .sec-nav-item svg{width:19px;height:19px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 
-/* 종목 상세 서브탭 */
 .sd-tabs{display:flex;gap:22px;padding:0 20px;border-bottom:1px solid #f2f4f6;margin-top:16px}
 .sd-tab{font-size:15.5px;font-weight:700;color:#8b95a1;padding-bottom:10px;position:relative;cursor:pointer}
 .sd-tab.active{color:#191f28;font-weight:800}
@@ -35,7 +30,7 @@
 .network-spinner-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.1);backdrop-filter:blur(1px);z-index:999999;display:none;align-items:center;justify-content:center}.network-spinner-modal.active{display:flex}.ios-spinner{width:30px;height:30px;border:3.5px solid rgba(49,130,246,.2);border-top-color:var(--toss-blue);border-radius:50%;animation:spin .55s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
 </style></head><body><div class="app-viewport">
 
-<!-- [0] 토스 스플래시 화면 (순백색 배경 + 중앙 3D 블루 심볼만 단독 노출 -> 1.1초 후 홈으로 자연 전환) -->
+<!-- [0] 토스 스플래시 화면 -->
 <div id="splash-screen" class="splash-screen">
   <svg class="toss-symbol-3d" viewBox="0 0 80 80" fill="none">
     <defs>
@@ -54,9 +49,7 @@
   </svg>
 </div>
 
-<!-- =========================================
-     [탭 1] 토스 홈 화면 (첫 화면에서 증권계좌 제외)
-     ========================================= -->
+<!-- [탭 1] 토스 홈 화면 -->
 <div id="screen-home" class="screen active">
   <div style="padding:14px 20px 10px;display:flex;justify-content:space-between;align-items:center;">
     <div style="display:flex;align-items:center;gap:6px;cursor:pointer;" onclick="triggerAction()">
@@ -73,7 +66,6 @@
     </div>
   </div>
 
-  <!-- 한도 예외 적용 대출 배너 -->
   <div id="home-loan-banner" class="toss-card" style="padding:16px 18px;display:flex;align-items:center;justify-content:space-between;position:relative;">
     <div style="display:flex;align-items:center;gap:12px;">
       <div style="width:38px;height:38px;border-radius:12px;background:#eef4fe;display:flex;align-items:center;justify-content:center;color:#3182f6;">
@@ -88,7 +80,6 @@
     <button onclick="document.getElementById('home-loan-banner').style.display='none'" style="position:absolute;top:-8px;right:-4px;width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid #e5e8eb;color:#8b95a1;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.06);">✕</button>
   </div>
 
-  <!-- 메인 계좌 & 포인트 카드 -->
   <div class="toss-card" style="padding:18px 20px 14px;">
     <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0 14px;cursor:pointer;" onclick="triggerAction()">
       <div style="display:flex;align-items:center;gap:14px;">
@@ -152,7 +143,6 @@
     </div>
   </div>
 
-  <!-- 11월에 쓴 돈 카드 -->
   <div class="toss-card">
     <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #f2f4f6;">
       <div>
@@ -167,7 +157,6 @@
     </div>
   </div>
 
-  <!-- 내 신용점수 카드 -->
   <div class="toss-card" onclick="revealCredit()" style="cursor:pointer;">
     <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #f2f4f6;">
       <span style="font-size:15.5px;font-weight:800;color:#191f28;">내 신용점수</span>
@@ -181,12 +170,7 @@
   </div>
 </div>
 
-<!-- =========================================
-     [핵심 화면] 토스증권
-     - 아이로보틱스: 798주 / 평단 2,685원 / 현재가 1,693원 / 평가금 1,351,014원 / -791,616 (-36.9%)
-     - 애플: 0.003684주 / 평가금 $1.30 (1,820원) / +903 (+98.6%)
-     - 내 투자 총 평가금: 1,352,834원 / -790,713원 (-36.9%)
-     ========================================= -->
+<!-- [핵심 화면] 토스증권 (아이로보틱스 종가 1,691원 기준 업데이트) -->
 <div id="screen-securities" class="screen" style="background:#ffffff;padding-bottom:100px;">
   <div style="padding:12px 20px 4px;display:flex;justify-content:flex-end;align-items:center;gap:18px;background:#fff;">
     <button style="background:none;border:none;color:#4e5968;cursor:pointer;" onclick="triggerAction()"><svg style="width:22px;height:22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
@@ -196,13 +180,11 @@
     </div>
   </div>
 
-  <!-- 타이틀 줄 -->
   <div style="padding:4px 20px 14px;display:flex;align-items:baseline;gap:10px;background:#fff;">
     <span style="font-size:22px;font-weight:900;color:#191f28;letter-spacing:-.5px;">토스증권</span>
     <span style="font-size:14px;font-weight:700;color:#6b7684;">코스피 <span style="color:#f04452;font-weight:800;">4,902.04</span> <span style="color:#f04452;font-size:13px;">+4.0%</span></span>
   </div>
 
-  <!-- 공지사항 배너 -->
   <div id="sec-notice-card" style="margin:0 16px 18px;background:#fff;border:1px solid #f2f4f6;border-radius:18px;padding:16px 18px;box-shadow:0 3px 14px rgba(0,0,0,.04);display:flex;justify-content:space-between;align-items:center;position:relative;">
     <div>
       <div style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#8b95a1;">
@@ -217,7 +199,6 @@
 
   <div style="height:10px;background:#f2f4f6;margin-bottom:18px;"></div>
 
-  <!-- 계좌 전환 칩 -->
   <div style="padding:0 20px 18px;display:flex;align-items:center;gap:14px;">
     <div style="display:inline-flex;align-items:center;gap:6px;background:#f2f4f6;padding:8px 14px;border-radius:12px;font-size:14px;font-weight:800;color:#191f28;">
       <svg style="width:16px;height:16px;" viewBox="0 0 80 80" fill="none"><path d="M42 18C27.5 18 16 28.5 16 41C16 48.2 21.5 53.5 29 53.5C35.2 53.5 40 49.5 42 44.5V18Z" fill="#3182f6"/><path d="M38 62C52.5 62 64 51.5 64 39C64 31.8 58.5 26.5 51 26.5C44.8 26.5 40 30.5 38 35.5V62Z" fill="#1b64da"/></svg>
@@ -227,7 +208,6 @@
     <span style="font-size:14px;font-weight:700;color:#8b95a1;cursor:pointer;" onclick="triggerAction()">계좌 만들기 +</span>
   </div>
 
-  <!-- 내 계좌 (원화 7원 / 달러 $0.00) -->
   <div style="padding:0 20px 8px;display:flex;justify-content:space-between;align-items:center;">
     <span style="font-size:15px;font-weight:800;color:#333d4b;">내 계좌</span>
     <span style="font-size:13px;color:#8b95a1;font-weight:600;cursor:pointer;" onclick="triggerAction()">더보기 &gt;</span>
@@ -243,16 +223,15 @@
     </div>
   </div>
 
-  <!-- 내 투자 총 평가금액 & 수익률 (-36.9% / 남은 돈 약 135만 원) -->
+  <!-- 내 투자 총 평가금액 & 수익률 (아이로보틱스 1,691원 마감 기준 합산) -->
   <div style="padding:0 20px 18px;">
     <div style="font-size:15px;font-weight:800;color:#333d4b;margin-bottom:6px;">내 투자</div>
     <div style="font-size:28px;font-weight:900;color:#191f28;letter-spacing:-.6px;display:flex;align-items:center;gap:4px;">
-      <span id="sec-total-eval">1,352,834원</span>
+      <span id="sec-total-eval">1,351,238원</span>
       <svg style="width:20px;height:20px;color:#8b95a1;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </div>
-    <div style="font-size:14.5px;font-weight:700;color:#3182f6;margin-top:4px;" id="sec-total-profit">-790,713원 (36.9%)</div>
+    <div style="font-size:14.5px;font-weight:700;color:#3182f6;margin-top:4px;" id="sec-total-profit">-792,309원 (37.0%)</div>
 
-    <!-- 필터 컨트롤 바 -->
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px;">
       <button class="toss-pill-btn" style="font-size:12.5px;padding:7px 12px;" onclick="triggerAction()">직접 설정한 순 ∨</button>
       <div style="display:flex;align-items:center;gap:6px;">
@@ -268,9 +247,9 @@
     </div>
   </div>
 
-  <!-- 국내주식 섹션: 아이로보틱스 798주 (평단 2,685원 / 현재가 1,693원 / 평가금 1,351,014원 / -36.9%) -->
+  <!-- 국내주식 섹션: 아이로보틱스 798주 (평단 2,685원 / 종가 1,691원 / 평가금 1,349,418원 / -37.0%) -->
   <div style="padding:10px 20px 8px;display:flex;justify-content:space-between;align-items:center;">
-    <div style="font-size:15px;font-weight:800;color:#191f28;">국내주식 <span style="color:#3182f6;margin-left:4px;">-36.9%</span> <span style="color:#8b95a1;font-size:13px;">&gt;</span></div>
+    <div style="font-size:15px;font-weight:800;color:#191f28;">국내주식 <span style="color:#3182f6;margin-left:4px;">-37.0%</span> <span style="color:#8b95a1;font-size:13px;">&gt;</span></div>
     <svg style="width:16px;height:16px;color:#8b95a1;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
   </div>
 
@@ -288,14 +267,14 @@
       </div>
     </div>
     <div style="text-align:right;">
-      <div style="font-size:16px;font-weight:800;color:#191f28;" class="stock-val" data-eval="1,351,014원" data-cur="1,693원">1,351,014원</div>
-      <div style="font-size:12.5px;font-weight:700;color:#3182f6;margin-top:2px;">-791,616 (36.9%)</div>
+      <div style="font-size:16px;font-weight:800;color:#191f28;" class="stock-val" data-eval="1,349,418원" data-cur="1,691원">1,349,418원</div>
+      <div style="font-size:12.5px;font-weight:700;color:#3182f6;margin-top:2px;">-793,212 (37.0%)</div>
     </div>
   </div>
 
   <div style="height:1px;background:#f2f4f6;margin:10px 20px;"></div>
 
-  <!-- 해외주식 섹션: 애플 0.003684주 ($1.30 / 1,820원, +98.6%) -->
+  <!-- 해외주식 섹션: 애플 0.003684주 -->
   <div style="padding:10px 20px 8px;display:flex;justify-content:space-between;align-items:center;">
     <div style="font-size:15px;font-weight:800;color:#191f28;">해외주식 <span style="color:#f04452;margin-left:4px;">+98.6%</span> <span style="color:#8b95a1;font-size:13px;">&gt;</span></div>
     <svg style="width:16px;height:16px;color:#8b95a1;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
@@ -326,7 +305,7 @@
 
   <div style="height:10px;background:#f2f4f6;"></div>
 
-  <!-- 1. 주문내역 / 판매수익 / 배당금 / 수익분석 > -->
+  <!-- 주문내역 / 판매수익 / 배당금 / 수익분석 > -->
   <div style="padding:8px 20px;">
     <div onclick="triggerAction()" style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;cursor:pointer;">
       <span style="font-size:16px;font-weight:700;color:#191f28;">주문내역</span>
@@ -347,7 +326,7 @@
 
   <div style="height:10px;background:#f2f4f6;"></div>
 
-  <!-- 2. 최근 본 종목 -->
+  <!-- 최근 본 종목 (1,691원 반영) -->
   <div id="recent-viewed-box" style="padding:20px;">
     <div style="font-size:17px;font-weight:800;color:#191f28;">최근 본 종목</div>
     <div style="font-size:12.5px;color:#8b95a1;margin-top:4px;margin-bottom:16px;">오늘 누적 거래량을 어제 이맘때와 비교했어요.</div>
@@ -366,8 +345,8 @@
       </div>
       <div style="display:flex;align-items:center;gap:12px;">
         <div style="text-align:right;" onclick="openStockDetail('irobotics')">
-          <div style="font-size:15px;font-weight:800;color:#f04452;">+7.9%</div>
-          <div style="font-size:12.5px;color:#6b7684;margin-top:1px;">1,693원</div>
+          <div style="font-size:15px;font-weight:800;color:#f04452;">+7.8%</div>
+          <div style="font-size:12.5px;color:#6b7684;margin-top:1px;">1,691원</div>
         </div>
         <button onclick="document.getElementById('recent-viewed-box').style.display='none'" style="background:none;border:none;color:#adb5bd;font-size:15px;cursor:pointer;padding:4px;">✕</button>
       </div>
@@ -376,7 +355,7 @@
 
   <div style="height:10px;background:#f2f4f6;"></div>
 
-  <!-- 3. 네이버페이 광고 배너 -->
+  <!-- 네이버페이 광고 배너 -->
   <div onclick="triggerAction()" style="padding:18px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;">
     <div style="width:40px;height:40px;border-radius:12px;background:#03c75a;color:#fff;font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">N</div>
     <div>
@@ -387,7 +366,7 @@
 
   <div style="height:10px;background:#f2f4f6;"></div>
 
-  <!-- 4. 한용민님을 위한 맞춤형 서비스 -->
+  <!-- 한용민님을 위한 맞춤형 서비스 -->
   <div style="padding:22px 20px 10px;">
     <div style="font-size:17px;font-weight:800;color:#191f28;margin-bottom:16px;">한용민님을 위한 맞춤형 서비스</div>
 
@@ -419,11 +398,8 @@
   </div>
 </div>
 
-<!-- =========================================
-     [상세 화면] 토스증권 종목 상세 (첨부된 1,693원 틱차트 + [차트 | 호가 | 내 주식 | 종목정보 | 커뮤니티] 탭 완벽 구현)
-     ========================================= -->
+<!-- [상세 화면] 토스증권 종목 상세 (1,691원 종가마감 반영) -->
 <div id="screen-stock-detail" class="screen" style="background:#ffffff;padding-bottom:96px;">
-  <!-- 상단 네비게이션: < / 하트 / 노란 종 / 더보기 -->
   <div style="padding:12px 20px 8px;display:flex;align-items:center;justify-content:space-between;">
     <button onclick="switchScreen('screen-securities')" style="background:none;border:none;color:#191f28;cursor:pointer;display:flex;align-items:center;padding:2px;"><svg style="width:24px;height:24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
     <div style="display:flex;align-items:center;gap:16px;">
@@ -433,17 +409,15 @@
     </div>
   </div>
 
-  <!-- 종목명 & 현재가 & 등락폭 -->
   <div style="padding:4px 20px 0;">
     <div style="display:flex;align-items:center;gap:6px;">
       <span style="font-size:17px;font-weight:800;color:#191f28;" id="sd-title">아이로보틱스</span>
       <span style="width:18px;height:18px;border-radius:50%;background:#f2f4f6;color:#8b95a1;font-size:10px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">Q</span>
     </div>
-    <div style="font-size:32px;font-weight:900;color:#191f28;margin-top:4px;letter-spacing:-.8px;" id="sd-price">1,693원</div>
-    <div style="font-size:14.5px;font-weight:700;color:#6b7684;margin-top:4px;" id="sd-change">어제보다 <span style="color:#f04452;">+124원 (7.9%)</span></div>
+    <div style="font-size:32px;font-weight:900;color:#191f28;margin-top:4px;letter-spacing:-.8px;" id="sd-price">1,691원</div>
+    <div style="font-size:14.5px;font-weight:700;color:#6b7684;margin-top:4px;" id="sd-change">어제보다 <span style="color:#f04452;">+122원 (7.8%)</span></div>
   </div>
 
-  <!-- 상단 5개 탭바: 차트 | 호가 | 내 주식 | 종목정보 | 커뮤니티 -->
   <div class="sd-tabs">
     <div class="sd-tab active" id="sd-tab-chart" onclick="switchSdTab('chart')">차트</div>
     <div class="sd-tab" id="sd-tab-orderbook" onclick="triggerAction()">호가</div>
@@ -452,33 +426,26 @@
     <div class="sd-tab" id="sd-tab-comm" onclick="triggerAction()">커뮤니티</div>
   </div>
 
-  <!-- [서브뷰 1] 차트 탭 (첨부 스크린샷 1,693원 틱차트 100% 재현) -->
+  <!-- [서브뷰 1] 차트 탭 -->
   <div id="sd-view-chart" style="padding:16px 20px;">
     <div style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#6b7684;margin-bottom:14px;">
       <span style="width:16px;height:16px;border-radius:50%;border:1.5px solid #adb5bd;display:inline-flex;align-items:center;justify-content:center;font-size:10px;">✓</span>
       <span>자세한 차트</span>
     </div>
 
-    <!-- 최고 1,725원 라벨 -->
     <div style="font-size:11.5px;font-weight:700;color:#f04452;margin-bottom:2px;" id="sd-high-label">최고 1,725원</div>
 
-    <!-- 정밀 인트라데이 틱차트 SVG (장초반 급락 후 급반등 붉은 파형 + 현재가 펄스 닷) -->
     <div style="position:relative;height:195px;display:flex;align-items:center;">
       <svg style="width:100%;height:185px;overflow:visible;" viewBox="0 0 320 170" fill="none" id="sd-chart-svg">
-        <!-- 점선 기준선 -->
         <line x1="0" y1="145" x2="320" y2="145" stroke="#e5e8eb" stroke-width="1.2" stroke-dasharray="3 3"/>
-        <!-- 인트라데이 실시간 틱 파형 -->
-        <path d="M2 88 L8 112 L13 138 L17 152 L22 135 L27 110 L31 65 L35 38 L39 58 L44 52 L49 58 L54 68 L60 72 L65 62 L70 68 L76 62 L82 48 L87 58 L92 66 L98 55 L103 28 L108 55 L113 62 L119 42 L124 62 L129 66 L135 55 L140 62 L146 48 L152 60 L158 55 L164 42 L170 46 L176 44" stroke="#f04452" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <!-- 현재가 붉은 원형 하이라이트 포인트 -->
-        <circle cx="176" cy="44" r="11" fill="#f04452" fill-opacity="0.16"/>
-        <circle cx="176" cy="44" r="4" fill="#f04452"/>
+        <path d="M2 88 L8 112 L13 138 L17 152 L22 135 L27 110 L31 65 L35 38 L39 58 L44 52 L49 58 L54 68 L60 72 L65 62 L70 68 L76 62 L82 48 L87 58 L92 66 L98 55 L103 28 L108 55 L113 62 L119 42 L124 62 L129 66 L135 55 L140 62 L146 48 L152 60 L158 55 L164 42 L170 46 L176 45" stroke="#f04452" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="176" cy="45" r="11" fill="#f04452" fill-opacity="0.16"/>
+        <circle cx="176" cy="45" r="4" fill="#f04452"/>
       </svg>
     </div>
 
-    <!-- 최저 1,560원 라벨 -->
     <div style="font-size:11.5px;font-weight:700;color:#3182f6;margin-top:2px;margin-bottom:18px;" id="sd-low-label">최저 1,560원</div>
 
-    <!-- 기간 선택 버튼 바: 1일 | 1주 | 3달 | 1년 | 5년 | 전체 | 캔들아이콘 -->
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
       <div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:700;color:#6b7684;">
         <span style="background:#f2f4f6;color:#191f28;font-weight:800;padding:6px 12px;border-radius:10px;">1일</span>
@@ -498,18 +465,17 @@
       </div>
     </div>
 
-    <!-- 하단 판매하기 / 구매하기 버튼 -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
       <button onclick="triggerAction()" style="background:#3182f6;color:#ffffff;border:none;padding:16px;border-radius:16px;font-size:16px;font-weight:800;cursor:pointer;">판매하기</button>
       <button onclick="triggerAction()" style="background:#f04452;color:#ffffff;border:none;padding:16px;border-radius:16px;font-size:16px;font-weight:800;cursor:pointer;">구매하기</button>
     </div>
   </div>
 
-  <!-- [서브뷰 2] 내 주식 탭 (평단 2,685원 / 798주 / -36.9% 상세 내역) -->
+  <!-- [서브뷰 2] 내 주식 탭 -->
   <div id="sd-view-mystock" style="display:none;padding:22px 20px;">
     <div style="font-size:14px;color:#8b95a1;font-weight:600;">내 주식</div>
-    <div style="font-size:28px;font-weight:900;color:#191f28;margin-top:4px;" id="sd-ms-eval">1,351,014원</div>
-    <div style="font-size:14.5px;font-weight:700;color:#3182f6;margin-top:4px;" id="sd-ms-profit">-791,616원 (-36.9%)</div>
+    <div style="font-size:28px;font-weight:900;color:#191f28;margin-top:4px;" id="sd-ms-eval">1,349,418원</div>
+    <div style="font-size:14.5px;font-weight:700;color:#3182f6;margin-top:4px;" id="sd-ms-profit">-793,212원 (-37.0%)</div>
 
     <div style="background:#f9fafb;border-radius:18px;padding:18px;margin-top:20px;">
       <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:12px;"><span style="color:#6b7684;">1주 평균금액</span><span style="font-weight:800;color:#191f28;" id="sd-ms-avg">2,685원</span></div>
@@ -566,7 +532,6 @@
 </div>
 
 <script>
-// 스플래시 1.1초 후 비밀번호 없이 자연스럽게 홈 화면 진입
 window.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>{
     const sp=document.getElementById('splash-screen');
@@ -601,7 +566,6 @@ function switchScreen(targetId){
   },380);
 }
 
-// 토스증권 현재가 / 평가금 & $ / 원 토글 로직
 let priceMode='eval';
 let currMode='KRW';
 function setPriceMode(mode){
@@ -623,12 +587,12 @@ function updateStockDisplays(){
   });
 }
 
-// 종목 상세 화면 데이터 및 탭 스위칭 (차트 <-> 내 주식)
+// 종목 상세 화면 데이터 (아이로보틱스 1,691원 종가마감 기준)
 const stocksInfo={
   irobotics:{
-    title:"아이로보틱스",price:"1,693원",changeHtml:'어제보다 <span style="color:#f04452;">+124원 (7.9%)</span>',
+    title:"아이로보틱스",price:"1,691원",changeHtml:'어제보다 <span style="color:#f04452;">+122원 (7.8%)</span>',
     high:"최고 1,725원",low:"최저 1,560원",
-    qty:"798주",avg:"2,685원",eval:"1,351,014원",cost:"2,142,630원",profit:"-791,616원 (-36.9%)",isLoss:true
+    qty:"798주",avg:"2,685원",eval:"1,349,418원",cost:"2,142,630원",profit:"-793,212원 (-37.0%)",isLoss:true
   },
   apple:{
     title:"애플",price:"494,028원",changeHtml:'어제보다 <span style="color:#f04452;">+6,120원 (1.3%)</span>',
